@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>沖繩家庭旅遊 | 2026 夏日行程導覽</title>
+    <!-- 使用 Tailwind CSS 進行現代化佈局 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- 引入動畫庫增加質感 -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --okinawa-blue: #0077b6;
+            --hibiscus-orange: #ff4d00;
+            --sand-white: #f8f9fa;
+        }
+        body {
+            background-color: var(--sand-white);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang TC", "Microsoft JhengHei", sans-serif;
+            scroll-behavior: smooth;
+            padding-bottom: 90px; 
+            font-size: 18px; 
+            color: #1e293b;
+        }
+        #top {
+            scroll-margin-top: 0;
+        }
+        /* 統一的行程卡片樣式 */
+        .vibe-card {
+            border-left: 6px solid var(--okinawa-blue);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        /* 頁首漸層藍色 */
+        .day-header {
+            background: linear-gradient(135deg, var(--okinawa-blue), #00b4d8);
+        }
+        /* 精簡導航按鈕 (小框框樣式) */
+        .nav-btn-sm {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            background-color: #ffffff;
+            color: var(--okinawa-blue);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border: 1.5px solid var(--okinawa-blue);
+            white-space: nowrap;
+        }
+        .nav-btn-sm:active {
+            background-color: var(--okinawa-blue);
+            color: white;
+        }
+        /* 底部固定導航欄 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 5px;
+            border-top: 1px solid #e2e8f0;
+            z-index: 999;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: bold;
+            flex: 1;
+            justify-content: center;
+        }
+        .bottom-nav-item.active {
+            color: var(--okinawa-blue);
+        }
+        .bottom-nav-icon {
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 28px;
+        }
+        section {
+            scroll-margin-top: 20px;
+        }
+        /* 行李清單交互樣式 */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        input[type="checkbox"] {
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 1rem;
+            accent-color: var(--okinawa-blue);
+        }
+        /* 首頁快速連結按鈕 */
+        .header-link {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 99px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.2s;
+            display: inline-block;
+        }
+        .header-link:active {
+            background: rgba(255, 255, 255, 0.5);
+            transform: scale(0.95);
+        }
+        /* 頁首 D1-D5 圓形按鈕 */
+        .day-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .day-circle:active {
+            background: white;
+            color: var(--okinawa-blue);
+            transform: scale(0.9);
+        }
+    </style>
+</head>
+<body id="top">
+
+    <!-- 頂部區塊：網站標題與快速跳轉 -->
+    <header class="h-80 flex flex-col items-center justify-center text-white day-header relative px-4 text-center">
+        <div class="z-10 animate__animated animate__fadeIn w-full">
+            <h1 class="text-3xl font-bold tracking-tight mb-1">沖繩家庭旅遊</h1>
+            <p class="text-md opacity-90 font-medium mb-8">2026.05.12(二)~05.16(六)</p>
+            
+            <div class="flex flex-col gap-5 items-center">
+                <!-- 連結至行李清單 -->
+                <a href="#prep" class="header-link js-scroll-link shadow-lg">
+                    ✈️ 航班與行李準備
+                </a>
+                
+                <!-- 每日行程快速跳轉 -->
+                <div class="space-y-2">
+                    <p class="text-xs opacity-70 font-bold uppercase tracking-widest text-white">每日行程</p>
+                    <div class="flex gap-3 justify-center">
+                        <a href="#day1" class="day-circle js-scroll-link">D1</a>
+                        <a href="#day2" class="day-circle js-scroll-link">D2</a>
+                        <a href="#day3" class="day-circle js-scroll-link">D3</a>
+                        <a href="#day4" class="day-circle js-scroll-link">D4</a>
+                        <a href="#day5" class="day-circle js-scroll-link">D5</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 裝飾波浪 -->
+        <div class="absolute bottom-0 left-0 right-0 h-12 bg-sand-white" style="clip-path: ellipse(60% 100% at 50% 100%);"></div>
+    </header>
+
+    <!-- 底部固定選單 (首頁 + D1~D5) -->
+    <nav class="bottom-nav">
+        <a href="#top" class="bottom-nav-item js-scroll-link">
+            <span class="bottom-nav-icon">首頁</span>
+        </a>
+        <a href="#day1" class="bottom-nav-item js-scroll-link">
+            <span class="bottom-nav-icon">D1</span>
+        </a>
+        <a href="#day2" class="bottom-nav-item js-scroll-link">
+            <span class="bottom-nav-icon">D2</span>
+        </a>
+        <a href="#day3" class="bottom-nav-item js-scroll-link">
+            <span class="bottom-nav-icon">D3</span>
+        </a>
+        <a href="#day4" class="bottom-nav-item js-scroll-link">
+            <span class="bottom-nav-icon">D4</span>
+        </a>
+        <a href="#day5" class="bottom-nav-item js-scroll-link">
+            <span class="bottom-nav-icon">D5</span>
+        </a>
+    </nav>
+
+    <main class="p-4 space-y-12">
+
+        <!-- 航班與行李準備 -->
+        <section id="prep">
+            <h2 class="text-xl font-bold text-sky-800 mb-4 flex items-center">
+                <span class="mr-2">✈️</span> 航班與行李準備
+            </h2>
+            
+            <div class="space-y-4">
+                <!-- 去程航班卡片 -->
+                <div class="bg-white rounded-2xl border-2 border-blue-100 p-5 shadow-sm">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-blue-600 text-white px-3 py-1 rounded-lg text-sm font-bold tracking-wide">去程 5/12(二)</span>
+                        <span class="text-sm font-bold text-slate-500 font-mono">FD230</span>
+                    </div>
+                    <div class="flex justify-between items-center text-center">
+                        <div><span class="text-2xl font-black text-slate-700">TPE 桃園</span><span class="block text-blue-600 font-bold text-xl mt-1">13:30</span></div>
+                        <div class="text-slate-300 text-2xl">➔</div>
+                        <div><span class="text-2xl font-black text-slate-700">OKA 那霸</span><span class="block text-blue-600 font-bold text-xl mt-1">15:55</span></div>
+                    </div>
+                    <div class="text-center mt-3 text-sm text-slate-400 font-bold border-t pt-2 italic">飛行時間：1小時25分鐘</div>
+                </div>
+
+                <!-- 回程航班卡片 -->
+                <div class="bg-white rounded-2xl border-2 border-orange-100 p-5 shadow-sm">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="bg-orange-500 text-white px-3 py-1 rounded-lg text-sm font-bold tracking-wide">回程 5/16(六)</span>
+                        <span class="text-sm font-bold text-slate-500 font-mono">FD231</span>
+                    </div>
+                    <div class="flex justify-between items-center text-center">
+                        <div><span class="text-2xl font-black text-slate-700">OKA 那霸</span><span class="block text-orange-600 font-bold text-xl mt-1">16:55</span></div>
+                        <div class="text-slate-300 text-2xl rotate-180 text-orange-200">✈️</div>
+                        <div><span class="text-2xl font-black text-slate-700">TPE 桃園</span><span class="block text-orange-600 font-bold text-xl mt-1">17:30</span></div>
+                    </div>
+                    <div class="text-center mt-3 text-sm text-slate-400 font-bold border-t pt-2 italic">飛行時間：1小時35分鐘</div>
+                </div>
+            </div>
+
+            <!-- 行李檢查清單 -->
+            <div class="mt-8 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-2 flex items-center text-sky-700">🎒 隨身行李 - 7公斤</h3>
+                <div class="space-y-1 text-slate-700">
+                    <label class="checklist-item"><input type="checkbox"> 護照</label>
+                    <label class="checklist-item"><input type="checkbox"> 錢包 (日幣.台幣.信用卡)</label>
+                    <label class="checklist-item"><input type="checkbox"> 充電線、行動電源</label>
+                    <label class="checklist-item"><input type="checkbox"> 衛生紙、口罩...</label>
+                    <label class="checklist-item"><input type="checkbox"> 保溫瓶</label>
+                </div>
+            </div>
+
+            <div class="mt-6 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <h3 class="font-bold text-lg mb-2 flex items-center text-amber-700">🧳 托運行李 - 20公斤</h3>
+                <div class="space-y-1 text-slate-700">
+                    <label class="checklist-item"><input type="checkbox"> 雨傘</label>
+                    <label class="checklist-item"><input type="checkbox"> 藥品</label>
+                    <label class="checklist-item"><input type="checkbox"> 拖鞋</label>
+                    <label class="checklist-item"><input type="checkbox"> 衣服 (內衣褲.睡衣.襪子...)</label>
+                    <label class="checklist-item"><input type="checkbox"> 盥洗用品 (牙刷.牙膏)</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 1 詳細行程 -->
+        <section id="day1">
+            <div class="bg-sky-700 text-white p-4 rounded-t-2xl font-bold flex justify-between items-center shadow-md">
+                <span>Day 1 | 5/12 (二)</span>
+                <span class="text-xs bg-sky-600 px-2 py-1 rounded">出發與那霸</span>
+            </div>
+            <div class="bg-white p-5 rounded-b-2xl border border-t-0 space-y-6 shadow-sm">
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">10:30</span>
+                    <h3 class="text-lg font-bold">家裡出發</h3>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">11:30</span>
+                    <h3 class="text-lg font-bold">桃園機場 - 第一航廈</h3>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-sky-600 block mb-1">13:30</span>
+                    <h3 class="text-lg font-bold">起飛 (飛機上附餐)</h3>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">15:55</span>
+                    <h3 class="text-lg font-bold">抵達沖繩那霸機場</h3>
+                    <p class="text-[12px] text-orange-600 font-bold mt-1">※ 日本比台灣快一個小時</p>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">17:00</span>
+                    <h3 class="text-lg font-bold">Times 租車公司領車</h3>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-orange-600 block mb-1">18:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-slate-800">鳥貴族串燒</h3>
+                        <a href="https://maps.app.goo.gl/onPLdYjAFzYr7oct8" target="_blank" class="nav-btn-sm border-orange-500 text-orange-600">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">19:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-slate-800">UNIQLO 採買</h3>
+                        <a href="https://maps.app.goo.gl/6PPvyfU6KvmLgqkX8" target="_blank" class="nav-btn-sm border-sky-500 text-sky-600">📍 導航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 2 詳細行程 -->
+        <section id="day2">
+            <div class="bg-sky-700 text-white p-4 rounded-t-2xl font-bold flex justify-between items-center shadow-md">
+                <span>Day 2 | 5/13 (三)</span>
+                <span class="text-xs bg-sky-600 px-2 py-1 rounded">南部行程</span>
+            </div>
+            <div class="bg-white p-5 rounded-b-2xl border border-t-0 space-y-6 shadow-sm">
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">08:00</span>
+                    <h3 class="text-lg font-bold">起床吃早餐</h3>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">09:30</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">沖繩世界</h3>
+                        <a href="https://maps.app.goo.gl/ZujD8U63GP3BKHHk7" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                    <p class="text-[12px] text-blue-600 font-bold mt-1">🕒 10:30 太鼓表演 / 11:30 毒蛇表演</p>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">12:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">糸滿漁民食堂</h3>
+                        <a href="https://maps.app.goo.gl/oPkEYpEKnbmphL7E6" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                    <p class="text-sm text-slate-500 mt-1">推薦：蒜香奶油煎魚</p>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">13:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">糸滿魚市場</h3>
+                        <a href="https://maps.app.goo.gl/jm5NVgbmiMQay38V6" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">14:30</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">世豊商店</h3>
+                        <a href="https://maps.app.goo.gl/jy8j8WhGW624vE779" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">15:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">國際通逛街</h3>
+                        <a href="https://maps.app.goo.gl/2gCZbF6YiPhGcn6i9" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">17:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">一蘭拉麵</h3>
+                        <a href="https://maps.app.goo.gl/hYid5YKrgJDzS42X6" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">18:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">瀨長島</h3>
+                        <a href="https://maps.app.goo.gl/pZuLHCZo5zukvugW8" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                    <p class="text-[12px] text-sky-700 font-bold mt-1">🌅 19:00 日落看夕陽吃鬆餅</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 3 詳細行程 -->
+        <section id="day3">
+            <div class="bg-sky-700 text-white p-4 rounded-t-2xl font-bold flex justify-between items-center shadow-md">
+                <span>Day 3 | 5/14 (四)</span>
+                <span class="text-xs bg-sky-600 px-2 py-1 rounded">中部行程</span>
+            </div>
+            <div class="bg-white p-5 rounded-b-2xl border border-t-0 space-y-6 shadow-sm">
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">09:30</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">波上宮神社</h3>
+                        <a href="https://maps.app.goo.gl/yyyYUVXn7YWwyGXo9" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">11:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">迴轉壽司市場</h3>
+                        <a href="https://maps.app.goo.gl/u2vdFaUNzq86JGQw8" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">12:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">美國村漫步</h3>
+                        <a href="https://maps.app.goo.gl/knKJzMTKJSdEkyGL8" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">14:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">萬座毛風景區</h3>
+                        <a href="https://maps.app.goo.gl/117eoP4ZP9RQz1AB7" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">15:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">部瀨名海中公園</h3>
+                        <a href="https://maps.app.goo.gl/gSMpkBBSu4nMbH7a7" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                    <p class="text-sm text-blue-600 font-bold mt-1 italic">★ 海中展望塔、玻璃船行程</p>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">17:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">阿古豬涮涮鍋</h3>
+                        <a href="https://maps.app.goo.gl/TFwphEw1fNpktZjD9" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">18:30</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">唐吉訶德-買藥妝</h3>
+                        <a href="https://maps.app.goo.gl/BusMLWx43GhvRygXA" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 4 詳細行程 -->
+        <section id="day4">
+            <div class="bg-sky-700 text-white p-4 rounded-t-2xl font-bold flex justify-between items-center shadow-md">
+                <span>Day 4 | 5/15 (五)</span>
+                <span class="text-xs bg-sky-600 px-2 py-1 rounded">北部巡禮</span>
+            </div>
+            <div class="bg-white p-5 rounded-b-2xl border border-t-0 space-y-6 shadow-sm">
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">09:30</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">心形岩 (Heart Rock)</h3>
+                        <a href="https://maps.app.goo.gl/U5MXkZrFg2xmpeLG6" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">10:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">古宇利海洋塔</h3>
+                        <a href="https://maps.app.goo.gl/jDw2hEPxqF9V3nPu8" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">11:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">古宇利蝦蝦飯+食堂</h3>
+                        <a href="https://maps.app.goo.gl/HAkjeSQZppAbDdpf7" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">12:30</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">美麗海水族館</h3>
+                        <a href="https://maps.app.goo.gl/HKoqBCqrs4tWGb6w6" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                    <p class="text-[12px] text-sky-700 font-bold mt-1">🕒 13:00 海豚秀 / 15:00 黑潮之海餵食秀</p>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">15:30</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Potama - 沖繩飯糰</h3>
+                        <a href="https://maps.app.goo.gl/vMZGPVXpZBmXeUgdA" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">16:30</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">瀨底島玻璃獨木舟</h3>
+                        <a href="https://maps.app.goo.gl/eh5YedwCECc753AFA" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Day 5 詳細行程 -->
+        <section id="day5">
+            <div class="bg-sky-700 text-white p-4 rounded-t-2xl font-bold flex justify-between items-center shadow-md">
+                <span>Day 5 | 5/16 (六)</span>
+                <span class="text-xs bg-sky-600 px-2 py-1 rounded">愉快賦歸</span>
+            </div>
+            <div class="bg-white p-5 rounded-b-2xl border border-t-0 space-y-6 shadow-sm">
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">10:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">泊港漁市場</h3>
+                        <a href="https://maps.app.goo.gl/4rwuXdETeXZDGWYt9" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">12:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">享用豬排飯</h3>
+                        <a href="https://maps.app.goo.gl/wBtT6TVakjUgBDABA" target="_blank" class="nav-btn-sm">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">14:00</span>
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-bold">Times 租車還車</h3>
+                        <a href="https://maps.app.goo.gl/UVSLNnPN6UTwBsUd9" target="_blank" class="nav-btn-sm border-orange-500 text-orange-600">📍 導航</a>
+                    </div>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-50">
+                    <span class="text-xs font-bold text-slate-400 block mb-1">16:55</span>
+                    <h3 class="text-lg font-bold">飛機起飛 (FD231)</h3>
+                </div>
+                <div class="vibe-card p-4 rounded-lg bg-slate-200 border-slate-400">
+                    <span class="text-xs font-bold text-slate-500 block mb-1">17:30</span>
+                    <h3 class="text-lg font-bold text-slate-700">平安抵達台灣</h3>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white p-12 text-center">
+        <p class="text-xl font-bold text-orange-400 mb-2 italic tracking-widest">めんそーれ (Welcome)</p>
+        <p class="text-sm opacity-60 px-6">祝家人沖繩之旅平安順心，留下最美好的回憶！</p>
+    </footer>
+
+    <script>
+        // 穩定捲動腳本，適用於手機各種瀏覽器
+        document.querySelectorAll('.js-scroll-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 捲動時動態切換底部選單的高亮狀態
+        window.addEventListener('scroll', () => {
+            const sections = ['top', 'day1', 'day2', 'day3', 'day4', 'day5'];
+            let current = '';
+            
+            for (const s of sections) {
+                const element = document.getElementById(s);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 250) {
+                        current = s;
+                    }
+                }
+            }
+            
+            document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                item.classList.remove('active');
+                let href = item.getAttribute('href').substring(1);
+                if (href === current) {
+                    item.classList.add('active');
+                }
+            });
+        }, { passive: true });
+    </script>
+</body>
+</html>
